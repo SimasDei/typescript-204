@@ -1,11 +1,12 @@
 import React from 'react';
 
 type Props = {
-  onClick: () => void;
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button = ({ onClick }: Props) => {
-  return <button onClick={onClick}>Hug me</button>;
+const Button: React.FC<Props> = ({ onClick, children }) => {
+  return <button onClick={onClick}>{children}</button>;
 };
 
 export default Button;
