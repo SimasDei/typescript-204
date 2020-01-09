@@ -1,7 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useRef } from 'react';
+
+import useClickOutside from '../hooks/useClickOutside';
 
 type Action = {
-  type: string;
+  type: 'one' | 'two';
   payload?: any;
 };
 
@@ -33,9 +35,12 @@ const reducer = (state: State, action: Action) => {
 
 const ReducerButton = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const ref = useRef<HTMLDivElement>(null!);
+
+  useClickOutside(ref, () => console.log('💩'));
 
   return (
-    <React.Fragment>
+    <div ref={ref}>
       <button onClick={() => dispatch({ type: 'one' })}>
         One{' '}
         <span role='img' aria-label='bee'>
@@ -44,7 +49,7 @@ const ReducerButton = () => {
       </button>
       <button onClick={() => dispatch({ type: 'two' })}>2b</button>
       {state?.rValue && 'Ahoy Sailor o/ ⛵'}
-    </React.Fragment>
+    </div>
   );
 };
 
