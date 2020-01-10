@@ -1,9 +1,9 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef } from "react";
 
-import useClickOutside from '../hooks/useClickOutside';
+import useClickOutside from "../hooks/useClickOutside";
 
 type Action = {
-  type: 'one' | 'two';
+  type: "one" | "two";
   payload?: any;
 };
 
@@ -12,20 +12,20 @@ type State = {
 };
 
 const initialState = {
-  rValue: true,
+  rValue: true
 };
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case 'one':
+    case "one":
       return {
         ...state,
-        rValue: true,
+        rValue: true
       };
-    case 'two':
+    case "two":
       return {
         ...state,
-        rValue: false,
+        rValue: false
       };
 
     default:
@@ -37,18 +37,18 @@ const ReducerButton = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const ref = useRef<HTMLDivElement>(null!);
 
-  useClickOutside(ref, () => console.log('💩'));
+  useClickOutside(ref, () => console.log("💩"));
 
   return (
     <div ref={ref}>
-      <button onClick={() => dispatch({ type: 'one' })}>
-        One{' '}
-        <span role='img' aria-label='bee'>
+      <button onClick={() => dispatch({ type: "one" })}>
+        One{" "}
+        <span role="img" aria-label="bee">
           🐝
         </span>
       </button>
-      <button onClick={() => dispatch({ type: 'two' })}>2b</button>
-      {state?.rValue && 'Ahoy Sailor o/ ⛵'}
+      <button onClick={() => dispatch({ type: "two" })}>2b</button>
+      {state?.rValue && "Ahoy Sailor o/ ⛵"}
     </div>
   );
 };
