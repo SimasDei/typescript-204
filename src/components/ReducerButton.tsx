@@ -1,6 +1,7 @@
-import React, { useReducer, useRef } from "react";
+import React, { useReducer, useRef, useContext } from "react";
 
 import useClickOutside from "../hooks/useClickOutside";
+import GlobalContext from "../global/state";
 
 type Action = {
   type: "one" | "two";
@@ -36,6 +37,7 @@ const reducer = (state: State, action: Action) => {
 const ReducerButton = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const ref = useRef<HTMLDivElement>(null!);
+  const { rValue } = useContext(GlobalContext);
 
   useClickOutside(ref, () => console.log("💩"));
 
@@ -48,7 +50,7 @@ const ReducerButton = () => {
         </span>
       </button>
       <button onClick={() => dispatch({ type: "two" })}>2b</button>
-      {state?.rValue && "Ahoy Sailor o/ ⛵"}
+      {rValue && "Ahoy Sailor o/ ⛵"}
     </div>
   );
 };
