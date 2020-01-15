@@ -7,9 +7,11 @@ type Action = {
 
 type State = {
   rValue: boolean;
+  turnOn?: () => void;
+  turnOff?: () => void;
 };
 
-export const initialValues = {
+export const initialValues: State = {
   rValue: true,
 };
 
@@ -36,8 +38,10 @@ const reducer = (state: State, action: Action) => {
 export const GlobalProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialValues);
 
-  const boundValues = {
+  const boundValues: State = {
     rValue: state.rValue,
+    turnOn: () => dispatch({ type: 'one' }),
+    turnOff: () => dispatch({ type: 'two' }),
   };
 
   return <GlobalContext.Provider value={boundValues}>{children}</GlobalContext.Provider>;
