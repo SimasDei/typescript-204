@@ -1,4 +1,5 @@
 import React, { useRef, useContext } from 'react';
+import styled from 'styled-components';
 
 import useClickOutside from '../hooks/useClickOutside';
 import GlobalContext from '../global/state';
@@ -10,7 +11,7 @@ const ReducerButton = () => {
   useClickOutside(ref, () => console.log('💩'));
 
   return (
-    <div ref={ref}>
+    <Wrapper ref={ref}>
       <button onClick={turnOn}>
         One{' '}
         <span role='img' aria-label='bee'>
@@ -19,8 +20,12 @@ const ReducerButton = () => {
       </button>
       <button onClick={turnOff}>2b</button>
       {rValue && 'Ahoy Sailor o/ ⛵'}
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  background: 'orangered';
+`;
 
 export default ReducerButton;
